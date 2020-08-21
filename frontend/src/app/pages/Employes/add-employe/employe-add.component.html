@@ -1,0 +1,52 @@
+<mat-toolbar>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+
+        <mat-form-field>
+          <input formControlName="name" matInput placeholder="name">
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="last_name" matInput placeholder="last_name">
+          <mat-error>Invalid desc.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="adress" matInput placeholder="adress">
+          <mat-error>Invalid op_code.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="city" matInput placeholder="city">
+          <mat-error>Invalid quantity.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="matricule" matInput placeholder="matricule">
+          <mat-error>Invalid with_subsequence.</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+          <input type="file" #filePicker (change)="onImagePicked($event)">
+        </div>
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && service.form.get('image').valid">
+          <img [src]="imagePreview" [alt]="service.form.value.name">
+
+        </div>
+
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

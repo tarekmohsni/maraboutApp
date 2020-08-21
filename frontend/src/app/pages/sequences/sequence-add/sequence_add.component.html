@@ -1,0 +1,42 @@
+<mat-toolbar>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+
+        <mat-form-field>
+          <input formControlName="description" matInput placeholder="description">
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="second_back_stitch" matInput placeholder="second_back_stitch">
+          <mat-error>Invalid desc second_back_stitch.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="stitchcount" matInput placeholder="stitchcount">
+          <mat-error>Invalid op_code.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="stitchcount_positive_tolerence" matInput placeholder="stitchcount_positive_tolerence">
+          <mat-error>Invalid quantity.</mat-error>
+        </mat-form-field>
+
+
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+

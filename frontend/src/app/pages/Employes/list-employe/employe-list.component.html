@@ -1,0 +1,63 @@
+<div>
+  <button mat-raised-button (click)="onCreat()">
+    <mat-icon> add</mat-icon>Add
+
+  </button>
+</div>
+<div class="mat-elevation-z8">
+  <table >
+    <tr>
+      <td>emp</td>
+    </tr>
+    <tr *ngFor="let emp of employeeList">
+      <td>{{emp.name}}</td>
+    </tr>
+  </table>
+  <mat-table [dataSource]="employeeList"  matSort>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="last_name">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>last_name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.last_name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="adress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>adress</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.adress}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>city</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.city}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="profile_image">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>profile image</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+      <div class="post-image">
+        <img [src]="element.profile_image" [alt]="element.name">
+      </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="deleteemp(element.emp_id)"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>

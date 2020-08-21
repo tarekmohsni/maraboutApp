@@ -1,0 +1,17 @@
+<div class="col-md-6 machine-container">
+  <h2 class="text-center">Add Machine</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="label">label:</label>
+      <input type="text" formControlName="label" placeholder="label" name="label" class="form-control" id="label">
+    </div>
+
+    <div class="form-group">
+      <label for="description">description:</label>
+      <input formControlName="description" placeholder="description" name="description" class="form-control" id="description">
+    </div>
+
+
+    <button class="btn btn-success">Add</button>
+  </form>
+</div>

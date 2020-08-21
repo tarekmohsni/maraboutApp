@@ -1,0 +1,38 @@
+<div>
+  <button mat-raised-button (click)="onCreat()">
+    <mat-icon> add</mat-icon>Add
+
+  </button>
+</div>
+
+<mat-accordion >
+  <mat-expansion-panel *ngFor="let op of OpList" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{op.label}}</mat-panel-title>
+      <mat-panel-description>
+        {{op.description}}
+        <button [routerLink]="['/seqlist',op.operation_template_id] ">
+        <mat-icon>list</mat-icon>
+        </button>
+        <button (click)="deleteOp(op.operation_template_id)" >
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      </mat-panel-description>
+
+
+    </mat-expansion-panel-header>
+    <span class="flex_seq"></span>
+    <p>Operation name</p>
+    <button (click)="deleteOp(op.operation_template_id)">
+    <mat-icon>delete</mat-icon>
+    </button>
+    <span class="flex_seq"></span>
+    <p>description {{op.description}}
+      <span class="flex_seq"></span>
+    <p>Code {{op.op_code}}</p>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+

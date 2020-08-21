@@ -1,0 +1,151 @@
+<mat-horizontal-stepper linear #stepper  class="normal-form"   >
+  <!-- #docregion editable -->
+  <mat-step [editable]="!isEditable"  >
+    <!-- #enddocregion editable -->
+    <form  [formGroup]="service.form" >
+
+      <mat-form-field>
+        <mat-label>label</mat-label>
+        <input matInput formControlName="label" placeholder="label" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>code</mat-label>
+        <input matInput formControlName="code" placeholder="code"
+               required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>ordrequantity</mat-label>
+        <input matInput formControlName="ordrequantity" placeholder="ordrequantity"
+               required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>description</mat-label>
+        <input matInput formControlName="description" placeholder="description"
+               required>
+      </mat-form-field>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{('Article')}} </label>
+          <ng-select placeholder="Article " formControlName="articless" [multiple]="true"
+                     [(ngModel)]="selectedArticleIds" [items]="articles"
+                     bindLabel="label" bindValue="article_id"
+                     [addTag]="addOrdreArticles" >
+            <ng-template ng-header-tmp>
+              <label for="check_all_1" >
+                <input id="check_all_1" type="checkbox"  [(ngModel)]="selectedAll" [ngModelOptions]="{standalone: true}" name="check_all_1" title="Select All" (change)="onSelectAll()"  />
+                Select All
+              </label>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+              <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   /> {{item.label}}
+            </ng-template>
+          </ng-select>
+
+        </div>
+      </div>
+      <ng-template matStepLabel>Ordre</ng-template>
+      <div >
+       <!-- <button mat-button  (click)="onClear()">Back</button> !-->
+        <button mat-button matStepperNext >Next</button>
+      </div>
+
+    </form>
+  </mat-step>
+  <mat-step [editable]="!isEditable" >
+    <form [formGroup]="service.form" >
+      <div formArrayName="bundles" *ngFor="let bdl of service.form.get('bundles').controls; let i = index;">
+        <p>Bundle</p>
+
+
+          <div [formGroupName]="i">
+
+              <mat-form-field>
+                <mat-label>num_bundle</mat-label>
+                <label>
+                  <input matInput formControlName="num_bundle" placeholder="num_bundle"
+                         required>
+                </label>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>size</mat-label>
+                <input matInput formControlName="size" placeholder="size"
+                       required>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>quantity</mat-label>
+                <input matInput formControlName="quantity" placeholder="quantity"
+                       required>
+              </mat-form-field>
+              <div formArrayName="Operations_group" class="operation_groupe">
+                <p>Operation Groupe</p>
+
+                <ng-template
+                  ngFor
+                  let-opg
+                  let-opgIndex="index"
+                  [ngForOf]="service.getOpGrp( bdl ).controls">
+                  <div
+                    [formGroupName]="opgIndex"
+                    class="operation_groupe__item">
+
+                    <input
+                      type="text"
+                      formControlName="line_id"
+                      required
+                      autofocus
+                      size="20"
+                      placeholder="line_id..."
+                    />
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{('Operation')}} </label>
+                        <ng-select placeholder="Operation " formControlName="operation_id" [multiple]="true"
+                                   [(ngModel)]="selectedOpeartionTemplateIds" [items]="operation_templates"
+                                   bindLabel="label" bindValue="operation_template_id"
+                                   [addTag]="addOperationTemplate" >
+                          <ng-template ng-header-tmp>
+                            <label for="check_all_2" >
+                              <input id="check_all_2" type="checkbox"  [(ngModel)]="selectedAll" [ngModelOptions]="{standalone: true}" name="check_all_2" title="Select All" (change)="onSelectAllOp()" />
+                              Select All
+                            </label>
+                          </ng-template>
+                          <ng-template ng-option-tmp let-item1="item1" let-item$="item$" let-index="index">
+                            <input id="item1-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   /> {{item1.op_code}}
+                          </ng-template>
+                        </ng-select>
+
+                      </div>
+                    </div>
+
+                    <a
+                      (click)="service.removeOp_group( bdl, opg )"
+                      title="Remove operation groupe"
+                      class="operation groupe__remove">
+                      &times;
+                    </a>
+
+                  </div>
+                </ng-template>
+                <button (click)="service.addOpGrp( bdl )" class="operation_groupe__add">
+                  + op
+                </button>
+              </div>
+
+          </div>
+
+      </div>
+
+    <ng-template matStepLabel>Bundle</ng-template>
+    <p>You are now done.</p>
+    <div >
+      <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()">Submit</button>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+
+    </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>

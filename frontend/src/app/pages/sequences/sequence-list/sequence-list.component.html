@@ -1,0 +1,32 @@
+<div>
+  <button mat-raised-button (click)="onCreat()">
+    <mat-icon> add</mat-icon>Add
+
+  </button>
+</div>
+  <mat-accordion >
+
+    <mat-expansion-panel *ngFor="let seq of sequenceList" >
+      <mat-expansion-panel-header>
+        <mat-panel-title>sequence 1</mat-panel-title>
+        <mat-panel-description>
+          back stitch|count stitch|cut stitch
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p>Stitch Count</p>
+      <ul>
+        <li>positive tolerence {{seq.stitchcount}}</li>
+        <li>positive tolerence </li>
+      </ul>
+
+      <p>Stitch Count</p>
+      <ul>
+        <li>positive tolerence {{seq.stitchcount}}</li>
+        <li>positive tolerence </li>
+      </ul>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
