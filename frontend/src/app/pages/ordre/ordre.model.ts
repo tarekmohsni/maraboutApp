@@ -7,5 +7,6 @@ export class Ordre {
   description: string;
   ordrequantity: string;
   bundles: Bundle [];
-  articless: [];
+  article_id: [];
+  client_id: [];
 }

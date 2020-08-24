@@ -17,6 +17,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MachinetypeService} from '../machine type.service';
 import {Machinestype} from '../machine type.model';
 import {MachineTypeAddComponent} from '../machine type add/machine-type-add.component';
+import {MachineTypeEditComponent} from '../machine type edit/machine-type-edit.component';
 
 
 @Component({
@@ -73,4 +74,16 @@ export class MachineTypeListComponent implements OnInit {
     this.machintypList.filter = this.searchKey.trim().toLowerCase();
   }
 
+  onedit(row) {
+    this.service.populateForm(row)
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    this.dialog.open(MachineTypeEditComponent, dialogConfig);
+  }
+  deletemach(id) {
+    this.service.Deletemachtype(id);
+    // location.reload();
+  }
 }

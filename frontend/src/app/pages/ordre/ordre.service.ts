@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {Bundle} from '../bundle/bundle.model';
 import {OperationGroupModel} from './operation-group.model';
 import {Article} from '../article-operation/article/article.model';
+import {Operation} from '../operations template/operation_t.model';
 
 
 @Injectable({
@@ -20,10 +21,10 @@ export class OrdreService {
   ordrelist: Ordre[];
   ordresub = new Subject<Ordre[]>();
   bundelsub = new Subject<Bundle[]>();
-  oplist: any[];
-  art: Article[];
-  datasub = new Subject<any[]>();
-  artsub = new Subject<Article[]>();
+  oplist: Operation[];
+  art: any[];
+  datasub = new Subject<Operation[]>();
+  artsub = new Subject<any[]>();
 
   public form: FormGroup;
 
@@ -37,7 +38,8 @@ export class OrdreService {
       code: new FormControl(''),
       description: new FormControl(''),
       ordrequantity: new FormControl(''),
-      articless: new FormControl([[], []]),
+      client_id: new FormControl([[], []]),
+      article_id: new FormControl([[], []]),
       bundles: this.formBuilder.array([this.createbundle()])
     });
   }
@@ -84,8 +86,8 @@ export class OrdreService {
   // get details ordre by id
 
   getdata(id: string) {
-    this.http.get<{ Op_t: any[], art: Article[] }>(`${this.baseUri + '/find_ordre/' + id}`).subscribe((dat) => {
-      this.oplist = dat.Op_t;
+    this.http.get<{ op_t: Operation[], art: Article[] }>(`${this.baseUri + '/find_ordre/' + id}`).subscribe((dat) => {
+      this.oplist = dat.op_t;
       this.art = dat.art;
       console.log(this.art);
       this.datasub.next(...[this.oplist]);
@@ -101,27 +103,31 @@ export class OrdreService {
               code: string,
               description: string,
               ordrequantity: string,
-              articless: [],
+              article_id: [],
+              client_id: [],
               bundles: Bundle[]) {
     const data = {
       'label': label,
       'code': code,
       'description': description,
       'ordrequantity': ordrequantity,
-      'articless': articless,
+      'article_id': article_id,
+      'client_id': client_id,
       'bundles': bundles
     };
+    console.log('ggggg');
     this.http.post<{ data: Ordre }>(this.baseUri + '/creat_ordre', data).subscribe((ord) => {
       const order: Ordre = {
         ordre_id: ord.data.ordre_id,
         label: label,
         code: code,
         description: description,
-        articless: articless,
+        article_id: article_id,
+        client_id: client_id,
         ordrequantity: ordrequantity,
         bundles: bundles
       };
-      console.log('ggggg');
+
       this.ordrelist.push(order);
       this.ordresub.next(...[this.ordrelist]);
       console.log(this.ordrelist);

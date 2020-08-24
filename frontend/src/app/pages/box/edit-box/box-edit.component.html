@@ -1,28 +1,80 @@
-<div class="col-md-6 user-container">
-  <h2 style="margin: auto"> User Details</h2>
-  <button class="btn btn-danger" style="width:100px" (click)="addUser()"> Add User</button>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th class="hidden">Id</th>
-      <th>FirstName</th>
-      <th>LastName</th>
-      <th>UserName</th>
-      <th>Age</th>
-      <th>Salary</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td class="hidden">{{user.id}}</td>
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.username}}</td>
-      <td>{{user.age}}</td>
-      <td>{{user.salary}}</td>
-      <td><button class="btn btn-success" (click)="deleteUser(user)"> Delete</button>
-        <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<mat-toolbar>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+
+        <mat-form-field>
+          <input formControlName="label" matInput placeholder="label">
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="adress_mac" matInput placeholder="adress mac">
+          <mat-error>Invalid desc.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="box_version" matInput placeholder="box version">
+          <mat-error>Invalid desc.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="box_ip" matInput placeholder="box ip">
+          <mat-error>Invalid desc.</mat-error>
+        </mat-form-field>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <ng-select placeholder="Machine " formControlName="mach_id"
+                       [(ngModel)]="selectedmachineIds" [items]="machine"
+                       bindLabel="label" bindValue="mach_id"
+                       [addTag]="addmachine" >
+              <ng-template ng-header-tmp>
+                <label for="check_all_1" >
+                  <input id="check_all_1" type="checkbox"  [(ngModel)]="selectedAllmach" [ngModelOptions]="{standalone: true}" name="check_all_1" title="Select All" (change)="onSelectAllmach()" />
+                  Select All
+                </label>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"  /> {{item.label}}
+              </ng-template>
+            </ng-select>
+
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <ng-select placeholder="Line " formControlName="line_id"
+                       [(ngModel)]="selectedlineIds" [items]="lines"
+                       bindLabel="label" bindValue="line_id"
+                       [addTag]="addline" >
+              <ng-template ng-header-tmp>
+                <label for="check_all_2" >
+                  <input id="check_all_2" type="checkbox"  [(ngModel)]="selectedAllmach" [ngModelOptions]="{standalone: true}" name="check_all_2" title="Select All" (change)="onSelectAllline()" />
+                  Select All
+                </label>
+              </ng-template>
+              <ng-template ng-option-tmp let-item1="item" let-item$="item$" let-index="index">
+                <input id="item1-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"  /> {{item1.label}}
+              </ng-template>
+            </ng-select>
+
+          </div>
+        </div>
+
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

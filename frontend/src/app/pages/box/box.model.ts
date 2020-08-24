@@ -1,6 +1,10 @@
 export class Boxs {
-  id_box: number;
+  box_id: string;
   label: string;
   adress_mac: string;
-  version: string;
+  box_version: string;
+  box_ip: string;
+  mach_id: [];
+  line_id: [];
+
 }

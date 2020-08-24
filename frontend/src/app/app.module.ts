@@ -35,6 +35,7 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgSelectModule} from '@ng-select/ng-select';
 import { SchedulerModule } from '@progress/kendo-angular-scheduler';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -48,33 +49,34 @@ import { SchedulerModule } from '@progress/kendo-angular-scheduler';
     headerComponent,
     SignupComponent
   ],
-  imports: [
-    BrowserAnimationsModule,
-    appRouting,
-    NavbarModule,
-    ToastrModule.forRoot(),
-    FooterModule,
-    FixedPluginModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatToolbarModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    HttpClientModule,
-    SidebarModule,
-    MatDialogModule,
-    MatTableModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    NgSelectModule,
-    SchedulerModule
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        appRouting,
+        NavbarModule,
+        ToastrModule.forRoot(),
+        FooterModule,
+        FixedPluginModule,
+        BrowserModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatToolbarModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatCardModule,
+        MatButtonModule,
+        MatExpansionModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        HttpClientModule,
+        SidebarModule,
+        MatDialogModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatFormFieldModule,
+        NgSelectModule,
+        SchedulerModule,
+        MatSelectModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}, ApiService

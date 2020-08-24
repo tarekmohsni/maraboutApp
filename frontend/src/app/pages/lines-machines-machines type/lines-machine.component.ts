@@ -19,11 +19,11 @@ export class LinesMachineComponent implements OnInit {
     this.navLinks = [
       {
         label: 'Line',
-        link: 'line-mach/oplist',
+        link: 'line-mach/linelist',
         icon: 'link'
       }, {
         label: 'Machines',
-        link: '',
+        link: 'line-mach/machinlist',
         icon: 'settings'
       }, {
         label: 'Machines type',

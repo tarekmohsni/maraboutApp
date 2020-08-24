@@ -32,9 +32,10 @@
 
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <button mat-icon-button [routerLink]="['/updordre',element.ordre_id] "><mat-icon>launch</mat-icon></button>
-        <button mat-icon-button [routerLink]="['/planif',element.ordre_id]"><mat-icon>date_range</mat-icon></button>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button  (click)="onedit(row)"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="deletemach(row.mach_type_id)"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button [routerLink]="['/planif',row.ordre_id]"><mat-icon>date_range</mat-icon></button>
       </mat-cell>
     </ng-container>
 

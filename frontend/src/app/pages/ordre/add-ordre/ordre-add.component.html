@@ -17,7 +17,7 @@
       <br>
       <mat-form-field>
         <mat-label>ordrequantity</mat-label>
-        <input matInput formControlName="ordrequantity" placeholder="ordrequantity"
+        <input matInput formControlName="ordrequantity" placeholder="ordre quantity"
                required>
       </mat-form-field>
 
@@ -29,9 +29,9 @@
       <div class="col-md-12">
         <div class="form-group">
           <label>{{('Article')}} </label>
-          <ng-select placeholder="Article " formControlName="articless" [multiple]="true"
+          <ng-select placeholder="Article " formControlName="article_id"
                      [(ngModel)]="selectedArticleIds" [items]="articles"
-                     bindLabel="label" bindValue="article_id"
+                     bindLabel="article_name" bindValue="article_id"
                      [addTag]="addOrdreArticles" >
             <ng-template ng-header-tmp>
               <label for="check_all_1" >
@@ -40,7 +40,28 @@
               </label>
             </ng-template>
             <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-              <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   /> {{item.label}}
+              <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   />{{item.article_name}}
+            </ng-template>
+          </ng-select>
+
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{('Client')}} </label>
+          <ng-select placeholder="client " formControlName="client_id"
+                     [(ngModel)]="selectedclientIds" [items]="clients"
+                     bindLabel="company" bindValue="client_id"
+                     [addTag]="addOrdreclient" >
+            <ng-template ng-header-tmp>
+              <label for="check_all_4" >
+                <input id="check_all_4" type="checkbox"  [(ngModel)]="selectedAll" [ngModelOptions]="{standalone: true}" name="check_all_4" title="Select All" (change)="onSelectAllclient()"  />
+                Select All
+              </label>
+            </ng-template>
+            <ng-template ng-option-tmp let-item4="item" let-item$="item$" let-index="index">
+              <input id="item4-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   />{{item4.company}}
             </ng-template>
           </ng-select>
 
@@ -91,20 +112,32 @@
                     [formGroupName]="opgIndex"
                     class="operation_groupe__item">
 
-                    <input
-                      type="text"
-                      formControlName="line_id"
-                      required
-                      autofocus
-                      size="20"
-                      placeholder="line_id..."
-                    />
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{('Line')}} </label>
+                        <ng-select placeholder="Line " formControlName="line_id" [multiple]="false"
+                                   [(ngModel)]="selectedlineIds" [items]="lines"
+                                   bindLabel="label" bindValue="line_id"
+                                   [addTag]="addline" >
+                          <ng-template ng-header-tmp>
+                            <label for="check_all_3" >
+                              <input id="check_all_3" type="checkbox"  [(ngModel)]="selectedAll" [ngModelOptions]="{standalone: true}" name="check_all_3" title="Select All" (change)="onSelectAllline()" />
+                              Select All
+                            </label>
+                          </ng-template>
+                          <ng-template ng-option-tmp let-item2="item" let-item$="item$" let-index="index">
+                            <input id="item2-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   /> {{item2.label}}
+                          </ng-template>
+                        </ng-select>
+
+                      </div>
+                    </div>
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>{{('Operation')}} </label>
                         <ng-select placeholder="Operation " formControlName="operation_id" [multiple]="true"
                                    [(ngModel)]="selectedOpeartionTemplateIds" [items]="operation_templates"
-                                   bindLabel="label" bindValue="operation_template_id"
+                                   bindLabel="op_code" bindValue="operation_template_id"
                                    [addTag]="addOperationTemplate" >
                           <ng-template ng-header-tmp>
                             <label for="check_all_2" >
@@ -112,7 +145,7 @@
                               Select All
                             </label>
                           </ng-template>
-                          <ng-template ng-option-tmp let-item1="item1" let-item$="item$" let-index="index">
+                          <ng-template ng-option-tmp let-item1="item" let-item$="item$" let-index="index">
                             <input id="item1-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   /> {{item1.op_code}}
                           </ng-template>
                         </ng-select>

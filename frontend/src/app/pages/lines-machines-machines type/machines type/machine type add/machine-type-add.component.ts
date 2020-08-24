@@ -4,7 +4,7 @@ import {NotificationService} from '../../../notification.service';
 import {MachinetypeService} from '../machine type.service';
 
 @Component({
-  selector: 'app-op',
+  selector: 'app-mach',
   templateUrl: './machine-type-add.component.html',
   styleUrls: ['./machine-type-add.component.css']
 })

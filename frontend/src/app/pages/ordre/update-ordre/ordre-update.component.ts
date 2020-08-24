@@ -4,6 +4,8 @@ import {Subscription} from 'rxjs';
 import {OrdreService} from '../ordre.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Article} from '../../article-operation/article/article.model';
+import {OperationService} from '../../operations template/operation_t.service';
+import {Operation} from '../../operations template/operation_t.model';
 
 
 @Component({
@@ -12,12 +14,14 @@ import {Article} from '../../article-operation/article/article.model';
   styleUrls: ['./ordre-update.component.css']
 })
 export class OrdreUpdateComponent implements OnInit {
-   artlist: MatTableDataSource<Article>;
+   artlist: any = [];
   private dataupd: Subscription;
   private ordreId: string;
-  datalist: any[];
+  datalist: Operation[];
   private artcupd: Subscription;
-  displayedColumns: string[] = ['code'];
+  selectedAllop = false;
+  selectedopIds: [];
+  displayedColumns: string[] = ['article_name', 'action'];
 
   constructor(private service: OrdreService, private router: ActivatedRoute) {
   }
@@ -28,12 +32,12 @@ export class OrdreUpdateComponent implements OnInit {
         this.ordreId = paramMap.get('id');
         console.log(this.ordreId);
         this.service.getdata(this.ordreId);
-        this.dataupd = this.service.datupdt().subscribe((list: any[]) => {
-          this.datalist = list;
+        this.dataupd = this.service.datupdt().subscribe((operation: any[]) => {
+          this.datalist = operation;
           console.log(this.datalist);
         });
         this.artcupd = this.service.artupdt().subscribe((art) => {
-          this.artlist = new MatTableDataSource(art);
+          this.artlist = art;
           console.log(this.artlist);
         });
       };
@@ -41,5 +45,18 @@ export class OrdreUpdateComponent implements OnInit {
 
     });
 
+
   }
+  public onSelectAllop() {
+    if (this.selectedAllop === true) {
+      const selected = this.datalist.map(item => item.operation_template_id)
+      this.service.form.get('operation_template_id').patchValue(selected);
+    } else {
+      const selected = []
+      this.service.form.get('operation_template_id').patchValue(selected);
+      console.log('false', selected)
+    }
+  }
+
+  addoperation = (term) => ({operation_template_id: term, label: term});
 }
