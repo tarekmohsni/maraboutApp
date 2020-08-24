@@ -48,21 +48,33 @@ db.cutomer = require('../model/customer.model')(sequelize,Sequelize);
 db.artline = require('../model/art-line.model')(sequelize,Sequelize);
 
 
-
-db.role.belongsToMany(db.user, { through: 'user_roles', foreignKey: 'roleId', otherKey: 'userId'});
-db.user.belongsToMany(db.role, { through: 'user_roles', foreignKey: 'userId', otherKey: 'roleId'});
+db.role.belongsToMany(db.user, { through: 'user_roles', foreignKey: 'id', otherKey: 'userId'});
+db.user.belongsToMany(db.role, { through: 'user_roles', foreignKey: 'userId', otherKey: 'id'});
 
 // line has many machine
-db.line.hasMany(db.machine);
-db.machine.belongsTo(db.line);
+db.line.hasMany(db.machine,{foreignKey:'line_id'});
+db.machine.belongsTo(db.line,{foreignKey:'line_id'});
+
+//machine has one machine type
+db.machine_type.hasOne(db.machine,{foreignKey:'mach_type_id'});
+db.machine.belongsTo(db.machine_type, {foreignKey:'mach_type_id'});
+
+//machine -- operation template(many to many)
+db.machine.belongsToMany(db.operation_template, { through: 'machine_op', foreignKey: 'mach_id', otherKey: 'operation_template_id'});
+db.operation_template.belongsToMany(db.machine, { through: 'machine_op', foreignKey: 'operation_template_id', otherKey: 'mach_id'});
+
 
 //site has many line
-db.site.hasMany(db.line);
-db.line.belongsTo(db.site);
+db.site.hasMany(db.line,{foreignKey:'site_id'});
+db.line.belongsTo(db.site,{foreignKey:'site_id'});
+
+// line has many box
+db.line.hasMany(db.box,{foreignKey:'line_id'});
+db.box.belongsTo(db.line,{foreignKey:'line_id'});
 
 // machine has one box
-db.box.belongsTo(db.machine);
-db.machine.hasOne(db.box);
+db.box.belongsTo(db.machine, {foreignKey:'mach_id'});
+db.machine.hasOne(db.box,{foreignKey:'mach_id'});
 
 // employe has one user-session
 db.employes.hasOne(db.user_session,{foreignKey:'emp_id'});

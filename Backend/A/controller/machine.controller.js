@@ -9,9 +9,13 @@ exports.create = (req,res) => {
         label: req.body.label,
         startworkDate: req.body.startworkDate,
         manufachinerlifeTime: req.body.manufachinerlifeTime,
-        operation: req.body.operation,
+        line_id: req.body.line_id,
+        mach_type_id: req.body.mach_type_id
     }).then(machine => {
-        res.send(machine);
+        if(req.body.operation_templatess){
+            machine.setOperation_templates(req.body.operation_templatess);
+        }
+        res.send({machine:machine});
     }).catch(function (err) {
         console.log("create machine failed with error: " + err);
         return 0;
@@ -32,43 +36,47 @@ exports.findAll = (req, res) => {
 // find Machine by id
 
 exports.findById = (req,res) =>{
-    Machine.findByPk(req.params.id_mach).then(machine =>{
+    Machine.findByPk(req.params.mach_id).then(machine =>{
         if(!machine){
-            return res.status(404).send({message:"machine not found with id" + req.params.id_mach});
+            return res.status(404).send({message:"machine not found with id" + req.params.mach_id});
         }
         res.send(machine);
     }).catch(err => {
         if(err.kind ==='ObjectId'){
             return res.status(404).send({
-                message: "machine not found with id " + req.params.id_mach
+                message: "machine not found with id " + req.params.mach_id
             });
 
         }
         return res.status(500).send({
-            message: "Error getting machine with id " + req.params.id_mach
+            message: "Error getting machine with id " + req.params.mach_id
         });
     });
 };
 
 // update Machine
 exports.update = (req,res) =>{
-    const id = req.params.id_mach;
+    const id = req.params.mach_id;
     Machine.update({
             label: req.body.label,
             startworkDate: req.body.startworkDate,
             manufachinerlifeTime: req.body.manufachinerlifeTime,
-            operation: req.body.operation,
+            line_id: req.body.line_id,
+            mach_type_id: req.body.mach_type_id
         },
-        { where: {id_mach: req.params.id_mach} }
+        { where: {mach_id: req.params.mach_id} }
     ).then(() => {
+        if(req.body.operation_templatess){
+            machine.setOperation_templates(req.body.operation_templatess);
+        }
         res.status(200).send("updated successfully a machine with id = " + id);
     });
 };
 //delete Machine
 exports.delete = (req,res) =>{
-    const id = req.params.id_mach;
+    const id = req.params.mach_id;
     Machine.destroy({
-        where:{id_mach: id}
+        where:{mach_id: id}
     }).then(() =>{
         res.status(200).send('deleted successfully a machine with id = ' + id);
     });

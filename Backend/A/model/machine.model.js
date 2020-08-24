@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const machine = sequelize.define('machines', {
-        id_mach:{
+        mach_id:{
             allowNull:false,
             autoIncrement:true,
             primaryKey:true,
@@ -12,15 +12,25 @@ module.exports = (sequelize, Sequelize) => {
         },
         startworkDate:{
             allowNull:false,
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         },
         manufachinerlifeTime:{
 
             type:Sequelize.INTEGER
         },
-        operation:{
-
-            type:Sequelize.STRING
+        line_id:{
+            type:Sequelize.INTEGER,
+            references:{
+                model:'lines',
+                key:'line_id'
+            }
+        },
+        mach_type_id:{
+            type:Sequelize.INTEGER,
+            references:{
+                model:'machine_types',
+                key:'mach_type_id'
+            }
         }
     });
     return machine;

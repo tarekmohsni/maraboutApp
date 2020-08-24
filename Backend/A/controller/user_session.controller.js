@@ -2,6 +2,7 @@ const db = require('../config/db.config');
 const User_session = db.user_session;
 const Employes = db.employes;
 const moment = require('moment');
+
 exports.authAction=(req, res, next)=>{
 
     let timeStamp = req.query._rt;

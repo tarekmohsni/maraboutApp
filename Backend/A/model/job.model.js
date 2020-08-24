@@ -1,6 +1,6 @@
 module.exports = (sequelize,Sequelize) =>{
     const job= sequelize.define('jobs',{
-        id_job:{
+        job_id:{
             allowNull:false,
             primaryKey:true,
             autoIncrement:true,

@@ -12,7 +12,7 @@ const Art_line = db.artline;
 // creat ordre
 
 exports.create = (req, res) => {
-    console.log('Order----', req.body);
+    console.log('Order____', req.body);
     let lines = [];
     let Opts = [];
 
@@ -21,9 +21,9 @@ exports.create = (req, res) => {
             Bundle.bulkCreate(req.body.bundles, {returning: true}).then(bundle => {
                 console.log('operation__group---', bundle);
                 if (req.body.bundles[0].Operations_group) {
-                    console.log('ssssssssss', req.body.bundles[0].Operations_group);
+                    console.log('operation groupe', req.body.bundles[0].Operations_group);
                     req.body.bundles[0].Operations_group.forEach(function (operation_group, i) {
-                        lines.push(operation_group.line_id);
+                        lines=(operation_group.line_id);
                         Opts = operation_group.operation_id;
                         console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', Opts);
                         console.log('lllll', lines, 'oooo', operation_group);
@@ -199,7 +199,7 @@ exports.findById = (req, res) => {
                     }
                     ;
                     console.log('gggggddtyrtyr', Op_t);
-                    res.send({Op_t, art, Lines});
+                    res.send({op_t, art, Lines});
 
                 });
 

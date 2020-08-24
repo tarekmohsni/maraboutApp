@@ -16,6 +16,7 @@ module.exports = function (app) {
     const user_session_controller = require('../controller/user_session.controller');
     const machine_controller = require('../controller/machine.controller');
     const machine_type_controller = require('../controller/machine_type.controller');
+    const site_controller = require('../controller/site.controller');
     const multer = require('multer');
     const MIME_TYPE_MAP = {
         'image/png': 'png',
@@ -76,10 +77,27 @@ module.exports = function (app) {
     // gestion box
     app.post('/api/test/creat_box', box_controller.create);
     app.get('/api/test/findall_box', box_controller.findAll);
+    app.put('/api/test/update_box/:box_id',box_controller.update);
+    app.delete('/api/test/delete_box/:boxid', box_controller.delete);
 
-    // gestion employe
-    app.post('/api/test/creat_employe', multer({storage: storage}).single('image'), employe_controller.create);
-    app.get('/api/test/findall_employe', employe_controller.findAll);
+    // gestion employe-Operateurs
+    app.post('/api/test/creat_Operateurs', multer({storage: storage}).single('image'), employe_controller.createOp);
+    app.get('/api/test/findall_Operateurs', employe_controller.findAllOp);
+    app.delete('/api/test/delete/employe/:emp_id', employe_controller.delete);
+
+    // gestion employe-Supervisors
+    app.post('/api/test/creat_Supervisors', multer({storage: storage}).single('image'), employe_controller.createSup);
+    app.get('/api/test/findall_Supervisors', employe_controller.findAllSup);
+    app.delete('/api/test/delete/employe/:emp_id', employe_controller.delete);
+
+    // gestion employe-Mechanics
+    app.post('/api/test/creat_Mechanics', multer({storage: storage}).single('image'), employe_controller.createMech);
+    app.get('/api/test/findall_Mechanics', employe_controller.findAllMech);
+    app.delete('/api/test/delete/employe/:emp_id', employe_controller.delete);
+
+    // gestion employe-Electronics
+    app.post('/api/test/creat_Electronics', multer({storage: storage}).single('image'), employe_controller.creatElec);
+    app.get('/api/test/findall_Electronics', employe_controller.findAllElc);
     app.delete('/api/test/delete/employe/:emp_id', employe_controller.delete);
 
     //gestion operation
@@ -88,6 +106,10 @@ module.exports = function (app) {
 
     //gestion machine
     app.post('/api/test/creat_machine', machine_controller.create);
+    app.get('/api/test/findall_mach', machine_controller.findAll);
+    app.put('/api/test/update_mach/:mach_id', machine_controller.update);
+    app.delete('/api/test/delete_mach/:mach_id', machine_controller.delete);
+
 
     // gestion ordre
     app.post('/api/test/creat_ordre', ordre_controller.create);
@@ -114,10 +136,15 @@ module.exports = function (app) {
 
     // gestion line
     app.post('/api/test/creat_line', line_controller.create);
+    app.get('/api/test/find_all_line', line_controller.findAll);
+    app.put('/api/test/update_line/:line_id', line_controller.update);
+    app.delete('/api/test/delete_line/:line_id', line_controller.delete);
 
     //gestion customers
     app.post('/api/test/creat_customer', customer_controller.create);
     app.get('/api/test/find_all_customer', customer_controller.findAll);
+    app.put('/api/test/update_customer/:client_id', customer_controller.update);
+    app.delete('/api/test/delete_customer/:client_id', customer_controller.delete);
 
     // gestion user_session
     app.post('/api/test/creat_user_session/?rt&rfid&adress_mac&box_ip&box_version', user_session_controller.authAction);
@@ -125,6 +152,13 @@ module.exports = function (app) {
     //gestion machine type
     app.post('/api/test/creat_machtyp',machine_type_controller.create);
     app.get('/api/test/findall_machtyp', machine_type_controller.findAll);
+    app.put('/api/test/update_machtyp/:mach_type_id', machine_type_controller.update);
+    app.delete('/api/test/delete_machtyp/:mach_type_id', machine_type_controller.delete);
 
+    //gestion site
+    app.post('/api/test/creat_site',site_controller.create);
+    app.get('/api/test/findall_site', site_controller.findAll);
+    app.put('/api/test/update_site/:site_id', site_controller.update);
+    app.delete('/api/test/delete_site/:site_id', site_controller.delete);
 
 }

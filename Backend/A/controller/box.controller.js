@@ -9,9 +9,11 @@ exports.create = (req, res) => {
         label: req.body.label,
         box_version: req.body.box_version,
         adress_mac: req.body.adress_mac,
-        box_ip: req.body.box_ip
+        box_ip: req.body.box_ip,
+        line_id:req.body.line_id,
+        mach_id: req.body.mach_id
     }).then(box => {
-        res.send(box);
+        res.send({box:box});
     }).catch(function (err) {
         console.log("create failed with error: " + err);
         return 0;
@@ -33,15 +35,32 @@ exports.findAll = (req, res) => {
 
 // find box by ID
 exports.findById = (req, res) => {
-    Box.findById(req.params.article_id).then(box => {
+    Box.findById(req.params.box_id).then(box => {
         res.send(box);
     })
+};
+
+// update box
+exports.update = (req,res) =>{
+    const id = req.params.box_id;
+    Box.update({
+            label: req.body.label,
+            box_version: req.body.box_version,
+            adress_mac: req.body.adress_mac,
+            box_ip: req.body.box_ip,
+            line_id:req.body.line_id,
+            mach_id: req.body.mach_id
+        },
+        { where: {box_id: id} }
+    ).then((box) => {
+        res.send({box:box});
+    });
 };
 
 // delete box with ID
 exports.delete = (req, res) => {
     Box.destroy({
-        where: {id: req.body.article_id }
+        where: {box_id: req.body.box_id }
     }).then(() => {
         res.send('ok');
     }).catch(function (err) {

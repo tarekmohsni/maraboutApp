@@ -53,6 +53,9 @@ module.exports=(sequelize, Sequelize) =>{
 
             type:Sequelize.STRING
         },
+        job:{
+            type:Sequelize.STRING
+        }
 
     });
     return Employe;

@@ -5,10 +5,10 @@ module.exports=(sequelize, Sequelize)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        client_name:{
+        company:{
             type:Sequelize.STRING
         },
-        phoneNumber:{
+        phone:{
             type:Sequelize.STRING
         },
         email:{
@@ -21,9 +21,6 @@ module.exports=(sequelize, Sequelize)=>{
             type:Sequelize.STRING
         },
         fax:{
-            type:Sequelize.STRING
-        },
-        picpath:{
             type:Sequelize.STRING
         },
         country:{

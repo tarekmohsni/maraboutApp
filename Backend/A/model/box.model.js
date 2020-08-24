@@ -21,6 +21,20 @@ module.exports = (sequelize, Sequelize) => {
         },
         box_ip:{
             type:Sequelize.STRING,
+        },
+        mach_id:{
+            type:Sequelize.INTEGER,
+            references:{
+                model:'machines',
+                key:'mach_id'
+            }
+        },
+        line_id:{
+            type:Sequelize.INTEGER,
+            references:{
+                model:'lines',
+                key:'line_id'
+            }
         }
 
     });
