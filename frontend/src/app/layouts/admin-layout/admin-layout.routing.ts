@@ -44,6 +44,7 @@ import {MechanicListComponent} from '../../pages/Employes/mechanics/list-mechani
 import {SupervisorsListComponent} from '../../pages/Employes/Supervisors/list-supervisors/supervisors-list.component';
 import {LineListComponent} from '../../pages/lines-machines-machines type/lines/lines list/line-list.component';
 import {LineAddComponent} from '../../pages/lines-machines-machines type/lines/lines add/line-add.component';
+import {ProfileListComponent} from '../../pages/Employes/profile/profile list/profile-list.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -93,6 +94,7 @@ export const AdminLayoutRoutes: Routes = [
       {path: 'dashboard/mechalist', component: MechanicListComponent},
       {path: 'dashboard/superlist' , component: SupervisorsListComponent},
       {path: 'dashboard/employe', component: EmployeListComponent},
+      {path: 'dashboard/profile', component: ProfileListComponent}
 
     ]},
   {path: 'addelec', component: ElectronicAddComponent},

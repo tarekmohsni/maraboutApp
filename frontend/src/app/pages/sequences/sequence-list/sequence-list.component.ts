@@ -24,12 +24,12 @@ export class SequenceListComponent implements OnInit {
     this.router.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.operationId = paramMap.get('id');
-        console.log(this.operationId);
+        console.log('idddddd', this.operationId);
         this.service.getSequence(this.operationId);
         this.sequpd = this.service.seqUpdt()
           .subscribe((sequences: Sequence[]) => {
             this.sequenceList = sequences;
-            console.log(this.sequenceList);
+            console.log('ftyjgch', this.sequenceList);
           });
       } else {
         this.operationId = null;
@@ -43,7 +43,14 @@ export class SequenceListComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
+    dialogConfig.data = {
+      opid : this.operationId
+    }
     this.dialog.open(SequenceComponent, dialogConfig);
+
+  }
+  deleteseq(id) {
+    this.service.Deleteseq(id);
   }
 }
 

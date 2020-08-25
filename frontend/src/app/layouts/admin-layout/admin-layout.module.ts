@@ -78,6 +78,9 @@ import {
 } from '../../pages/Employes/Supervisors/edit-supervisors/supervisors-edit.component';
 import {MechanicEditComponent} from '../../pages/Employes/mechanics/edit-mechanic/mechanic-edit.component';
 import {ElectroniceditComponent} from '../../pages/Employes/electronics/edit-electronic/electronic-edit.component';
+import {ProfileListComponent} from '../../pages/Employes/profile/profile list/profile-list.component';
+import {ProfileAddComponent} from '../../pages/Employes/profile/profile add/profile-add.component';
+import {ProfileEditComponent} from '../../pages/Employes/profile/profile edit/profile-edit.component';
 
 @NgModule({
   imports: [
@@ -155,7 +158,10 @@ import {ElectroniceditComponent} from '../../pages/Employes/electronics/edit-ele
     EmployeEditComponent,
     SupervisorseditComponent,
     MechanicEditComponent,
-    ElectroniceditComponent
+    ElectroniceditComponent,
+    ProfileListComponent,
+    ProfileAddComponent,
+    ProfileEditComponent
 
   ],
   entryComponents: [
@@ -182,7 +188,9 @@ import {ElectroniceditComponent} from '../../pages/Employes/electronics/edit-ele
     EmployeEditComponent,
     SupervisorseditComponent,
     MechanicEditComponent,
-    ElectroniceditComponent
+    ElectroniceditComponent,
+    ProfileAddComponent,
+    ProfileEditComponent
   ]
 })
 

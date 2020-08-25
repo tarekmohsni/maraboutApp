@@ -10,20 +10,25 @@
       <mat-expansion-panel-header>
         <mat-panel-title>sequence 1</mat-panel-title>
         <mat-panel-description>
-          back stitch|count stitch|cut stitch
+          back stitch: {{seq.back_stitch}} | count stitch : {{seq.stitchcount}}|cut stitch
         </mat-panel-description>
+
+        <button (click)="deleteseq(seq.sequence_id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-expansion-panel-header>
 
       <p>Stitch Count</p>
       <ul>
-        <li>positive tolerence {{seq.stitchcount}}</li>
-        <li>positive tolerence </li>
+        <li color="blue">stitch acount : {{seq.stitchcount}}</li>
+        <li>positive tolerence : {{seq.stitchcount_positive_tolerence}}</li>
+        <li>negative tolerence : {{seq.stitchcount_negative_tolerence}}</li>
       </ul>
 
-      <p>Stitch Count</p>
+      <p color="blue">Back Count : {{seq.back_stitch}}</p>
       <ul>
-        <li>positive tolerence {{seq.stitchcount}}</li>
-        <li>positive tolerence </li>
+        <li>positive tolerence : {{seq.back_stitch_positive_tolerence}}</li>
+        <li>negative tolerence :  {{seq.back_stitch_negative_tolerence}} </li>
       </ul>
 
     </mat-expansion-panel>

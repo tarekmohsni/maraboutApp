@@ -92,17 +92,17 @@ export class SequenceService {
         parent_sequence: sequence.parent_sequence,
         active: sequence.active,
         with_subsequences: sequence.with_subsequences,
-        operation_id: sequence.operation_id,
+        operation_template_id: sequence.operation_template_id,
       }
       this.sequencelist.push(seqc);
       console.log(seqc);
       this.seqsub.next(...[this.sequencelist]);
-      this.router.navigate(['/seqlist/:id']);
+      // this.router.navigate(['/seqlist']);
       // hireDate: employee.hireDate == "" ? "" : this.datePipe.transform(employee.hireDate, 'yyyy-MM-dd'),
     });
   }
 
-  DeleteOp(id: number) {
+  Deleteseq(id: string) {
     this.http.delete(this.baseUri + '/delete/operation/' + id).subscribe(res => {
 
 
