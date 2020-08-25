@@ -40,6 +40,23 @@ exports.findById = (req, res) => {
     })
 };
 
+// update article
+exports.update= (req,res) =>{
+    const id = req.params.article_id;
+    article.update({
+            code: req.body.code,
+            description: req.body.description,
+            article_name: req.body.article_name
+        },
+        { where: {article_id: id} }
+    ).then((article) => {
+        if(req.body.operation_templatess){
+            article.setOperation_templates(req.body.operation_templatess);
+        }
+        res.send({article:article});
+    });
+}
+
 // delete article with ID
 exports.delete = (req, res) => {
     const id = req.params.article_id;

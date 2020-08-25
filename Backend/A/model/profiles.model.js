@@ -5,25 +5,19 @@ module.exports=(sequelize,Sequelize)=>{
             primaryKey:true,
 
         },
-        profile_label:{
+        label:{
             type:Sequelize.STRING,
         },
-        profile_allowedsections:{
+        allowedsections:{
             type:Sequelize.STRING,
         },
-        profile_description:{
+        description:{
             type:Sequelize.STRING,
         },
         active:{
             type:Sequelize.STRING,
         },
-        has_update:{
-            type:Sequelize.STRING,
-        },
-        has_delete:{
-            type:Sequelize.STRING,
-        },
-        has_save:{
+        permis:{
             type:Sequelize.STRING,
         },
     });

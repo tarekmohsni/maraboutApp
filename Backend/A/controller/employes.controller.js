@@ -24,7 +24,7 @@ exports.createOp = (req, res)  => {
         status: req.body.status,
         matricule: req.body.matricule,
         email: req.body.email,
-        job:'Operators',
+        jooob:'Operators',
         profile_image: url + "/images/" + req.file.filename,
     }).then(employe => {
         res.send({employe:employe});
@@ -55,7 +55,7 @@ exports.createSup = (req, res)  => {
         status: req.body.status,
         matricule: req.body.matricule,
         email: req.body.email,
-        job:'Supervisors',
+        jooob:'Supervisors',
         profile_image: url + "/images/" + req.file.filename,
     }).then(employe => {
         res.send({employe:employe});
@@ -86,7 +86,7 @@ exports.createMech = (req, res)  => {
         status: req.body.status,
         matricule: req.body.matricule,
         email: req.body.email,
-        job:'Mechanics',
+        jooob:'Mechanics',
         profile_image: url + "/images/" + req.file.filename,
     }).then(employe => {
         res.send({employe:employe});
@@ -117,7 +117,7 @@ exports.creatElec = (req, res)  => {
         status: req.body.status,
         matricule: req.body.matricule,
         email: req.body.email,
-        job:'Electronics',
+        jooob:'Electronics',
         profile_image: url + "/images/" + req.file.filename,
     }).then(employe => {
         res.send({employe:employe});
@@ -132,7 +132,7 @@ exports.creatElec = (req, res)  => {
 // findall Operators
 exports.findAllOp = (req, res) => {
     Employe.findAll({
-        where: {job:'Operators'}
+        where: {jooob:'Operators'}
     }).then(employe => {
         res.send({employe:employe});
     }).catch(function (err) {
@@ -151,7 +151,7 @@ exports.findAllOp = (req, res) => {
 // findall Supervisors
 exports.findAllSup = (req, res) => {
     Employe.findAll({
-        where: {job:'Supervisors'}
+        where: {jooob:'Supervisors'}
     }).then(employe => {
         res.send({employe:employe});
     }).catch(function (err) {
@@ -170,7 +170,7 @@ exports.findAllSup = (req, res) => {
 // findall Mechanics
 exports.findAllMech = (req, res) => {
     Employe.findAll({
-        where: {job:'Mechanics'}
+        where: {jooob:'Mechanics'}
     }).then(employe => {
         res.send({employe:employe});
     }).catch(function (err) {
@@ -189,7 +189,7 @@ exports.findAllMech = (req, res) => {
 // findall Electronics
 exports.findAllElc = (req, res) => {
     Employe.findAll({
-        where: {job:'Electronics'}
+        where: {jooob:'Electronics'}
     }).then(employe => {
         res.send({employe:employe});
     }).catch(function (err) {

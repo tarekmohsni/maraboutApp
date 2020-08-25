@@ -5,7 +5,7 @@ module.exports= (sequelize, Sequelize)=>{
             primaryKey:true,
             autoIncrement:true,
         },
-        permission_label:{
+        label:{
             type:Sequelize.STRING,
         },
         active:{

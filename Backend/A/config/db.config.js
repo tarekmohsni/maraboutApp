@@ -46,11 +46,16 @@ db.line_op = require('../model/line-op')(sequelize,Sequelize);
 db.bundle_line = require('../model/bundle-line')(sequelize,Sequelize);
 db.cutomer = require('../model/customer.model')(sequelize,Sequelize);
 db.artline = require('../model/art-line.model')(sequelize,Sequelize);
+db.profil_permis = require('../model/profil_permis.model')(sequelize,Sequelize);
+
 
 
 db.role.belongsToMany(db.user, { through: 'user_roles', foreignKey: 'id', otherKey: 'userId'});
 db.user.belongsToMany(db.role, { through: 'user_roles', foreignKey: 'userId', otherKey: 'id'});
 
+// profiles -- permission (many to many)
+db.profiles.belongsToMany(db.permissions,{through: 'profil_permis', foreignKey:'profile_id', otherKey:'permission_id'});
+db.permissions.belongsToMany(db.profiles,{through: 'profil_permis', foreignKey:'permission_id', otherKey:'profile_id'});
 // line has many machine
 db.line.hasMany(db.machine,{foreignKey:'line_id'});
 db.machine.belongsTo(db.line,{foreignKey:'line_id'});
@@ -67,6 +72,10 @@ db.operation_template.belongsToMany(db.machine, { through: 'machine_op', foreign
 //site has many line
 db.site.hasMany(db.line,{foreignKey:'site_id'});
 db.line.belongsTo(db.site,{foreignKey:'site_id'});
+
+// job has many employe
+db.job.hasMany(db.employes,{foreignKey:'job_id'});
+db.employes.belongsTo(db.job,{foreignKey:'job_id'})
 
 // line has many box
 db.line.hasMany(db.box,{foreignKey:'line_id'});
@@ -86,8 +95,10 @@ db.box.hasOne(db.user_session,{foreignKey:'box_id'});
 
 
 //user-session has one c.p.s
-db.carte_pending_session.hasOne(db.user_session,{foreignKey:'c_p_s_id'});
-db.user_session.belongsTo(db.carte_pending_session,{foreignKey:'c_p_s_id'});
+db.carte_pending_session.belongsTo(db.user_session,{foreignKey:'usersession_id'});
+db.user_session.hasOne(db.carte_pending_session,{foreignKey:'usersession_id'});
+
+//
 
 //ordre has Many bundle
 db.ordre.hasMany(db.bundle, {foreignKey:'ord_id'});

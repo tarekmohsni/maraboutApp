@@ -17,6 +17,8 @@ module.exports = function (app) {
     const machine_controller = require('../controller/machine.controller');
     const machine_type_controller = require('../controller/machine_type.controller');
     const site_controller = require('../controller/site.controller');
+    const profile_controller =require('../controller/profiles.controller');
+    const permission_controller = require('../controller/permission.controller');
     const multer = require('multer');
     const MIME_TYPE_MAP = {
         'image/png': 'png',
@@ -80,6 +82,12 @@ module.exports = function (app) {
     app.put('/api/test/update_box/:box_id',box_controller.update);
     app.delete('/api/test/delete_box/:boxid', box_controller.delete);
 
+    // gestion profile
+    app.post('/api/test/creat_profile',profile_controller.create);
+    app.get('/api/test/findall_profile', profile_controller.findAll);
+    // permision
+    app.get('/api/test/findall_permis',permission_controller.findAll);
+
     // gestion employe-Operateurs
     app.post('/api/test/creat_Operateurs', multer({storage: storage}).single('image'), employe_controller.createOp);
     app.get('/api/test/findall_Operateurs', employe_controller.findAllOp);
@@ -124,8 +132,8 @@ module.exports = function (app) {
 
 
     //gestion sequence
-    app.post('/api/test/creat-sequence/:operation_id', sequence_controller.creat);
-    app.get('/api/test/findall_sequence/:operation_id', sequence_controller.findAll);
+    app.post('/api/test/creat-sequence/:operation_template_id', sequence_controller.creat);
+    app.get('/api/test/findall_sequence/:operation_template_id', sequence_controller.findAll);
 
     //gestion operation_template
     app.post('/api/test/creat_operation_t', operation_template_controller.creat);
@@ -147,7 +155,7 @@ module.exports = function (app) {
     app.delete('/api/test/delete_customer/:client_id', customer_controller.delete);
 
     // gestion user_session
-    app.post('/api/test/creat_user_session/?rt&rfid&adress_mac&box_ip&box_version', user_session_controller.authAction);
+    app.get('/api/test/creat_user_session', user_session_controller.authAction);
 
     //gestion machine type
     app.post('/api/test/creat_machtyp',machine_type_controller.create);
@@ -160,5 +168,6 @@ module.exports = function (app) {
     app.get('/api/test/findall_site', site_controller.findAll);
     app.put('/api/test/update_site/:site_id', site_controller.update);
     app.delete('/api/test/delete_site/:site_id', site_controller.delete);
+
 
 }

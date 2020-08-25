@@ -25,7 +25,7 @@ exports.create = (req,res) => {
 // findall Machine
 exports.findAll = (req, res) => {
     Machine.findAll().then(machine => {
-        res.send(machine);
+        res.send({machine:machine});
     }).catch(function (err) {
         console.log("find machine failed with error: " + err);
         return 0;

@@ -53,8 +53,15 @@ module.exports=(sequelize, Sequelize) =>{
 
             type:Sequelize.STRING
         },
-        job:{
+        jooob:{
             type:Sequelize.STRING
+        },
+        job_id:{
+            type:Sequelize.INTEGER,
+            references:{
+                model:'jobs',
+                key:'job_id'
+            }
         }
 
     });

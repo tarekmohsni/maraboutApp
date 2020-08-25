@@ -74,9 +74,7 @@ exports.authAction=(req, res, next)=>{
     }
     Employes.findOne({
         where: {
-            rfid: {
-                $ilike: rfid
-            },
+                rfid: rfid
         },
         include: [
             {
@@ -89,9 +87,8 @@ exports.authAction=(req, res, next)=>{
                 model: db.machine
             }],
             where: {
-                adress_mac: {
-                    $iLike: addr
-                }
+                adress_mac: addr
+
             }
 
         }).then(box =>{
@@ -99,7 +96,7 @@ exports.authAction=(req, res, next)=>{
                 User_session.findOne({
                     where:
                         {
-                            employee_id:
+                            emp_id:
                                 {
                                     $eq: user.emp_id
                                 },

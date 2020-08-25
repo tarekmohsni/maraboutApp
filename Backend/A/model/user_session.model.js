@@ -27,13 +27,7 @@ module.exports = (sequelize,Sequelize) => {
                 key:'emp_id'
             }
         },
-        c_p_s_id:{
-            type:Sequelize.INTEGER,
-            references:{
-                model:'carte_pending_sessions',
-                key:'c_p_s_id'
-            }
-        }
+
     });
     return user_session;
 }

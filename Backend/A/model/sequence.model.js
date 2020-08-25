@@ -6,37 +6,37 @@ module.exports= (sequelize, Sequelize) => {
             autoIncrement:true,
         },
         stitchcount:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         sequence_ordre:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         picture_id:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         active:{
             type: Sequelize.STRING,
         },
         coupe_fil:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         back_stitch:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         parent_sequence:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         back_stitch_positive_tolerence:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         back_stitch_negative_tolerence:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         stitchcount_positive_tolerence: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         stitchcount_negative_tolerence:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         with_subsequences:{
             type: Sequelize.STRING,
@@ -45,7 +45,7 @@ module.exports= (sequelize, Sequelize) => {
             type: Sequelize.STRING,
         },
         second_back_stitch: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         operation_template_id:{
             type: Sequelize.INTEGER,

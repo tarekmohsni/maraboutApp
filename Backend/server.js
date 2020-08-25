@@ -8,6 +8,7 @@ require('./A/router/routers.js')(app);
 const db = require('./A/config/db.config.js');
 
 const Role = db.role;
+const Permission =db.permissions;
 const path = require('path');
 
 // force: true will drop the table if it already exists
@@ -51,6 +52,16 @@ function initial(){
         id: 2,
         name: "ADMIN"
     });
+    Permission.create({
+        permission_id: 1,
+        label: "save",
+    });
+    Permission.create({permission_id: 2,
+            label: "delete"}
+    );
+    Permission.create({permission_id: 3,
+            label: "update"}
+    )
 
 
 }

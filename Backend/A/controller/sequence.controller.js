@@ -21,8 +21,7 @@ exports.creat = (req,res) =>{
         second_back_stitch: req.body.second_back_stitch,
             operation_template_id: req.params.operation_template_id,
 
-    },
-        { where: {operation_template_id: req.params.operation_template_id} }
+    }
     ).then(sequence =>{
         res.send({sequence: sequence});
     }).catch(function (err) {

@@ -25,6 +25,13 @@ module.exports=(sequelize,Sequelize)=>{
         },
         in_progress:{
             type:Sequelize.STRING,
+        },
+        usersession_id:{
+            type:Sequelize.INTEGER,
+            references:{
+                model:'user-ssessions',
+                key: 'usersession_id'
+            }
         }
     });
     return cps;
