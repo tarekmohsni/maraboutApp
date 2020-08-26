@@ -24,6 +24,16 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
 
+        },
+        profile_id:{
+            type:Sequelize.INTEGER,
+            references:{
+                model:'profiles',
+                key:'profile_id',
+            }
+        },
+        permissions:{
+            type:Sequelize.VIRTUAL
         }
     });
 

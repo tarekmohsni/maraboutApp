@@ -7,6 +7,7 @@ const Op_grp = db.operation_template;
 const Article = db.article;
 const Art_Op = db.artopt;
 const Art_line = db.artline;
+const Line_op = db.line_op
 
 
 // creat ordre
@@ -149,6 +150,7 @@ exports.findById = (req, res) => {
     const Op_t = [];
     const Lines_art = [];
     const Lines=[];
+    const Lin_op= []
     Ordre.findByPk(req.params.ordre_id).then(ordre => {
         if (!ordre) {
             return res.status(404).send({message: "ordre not found with id" + req.params.ordre_id});
@@ -171,9 +173,9 @@ exports.findById = (req, res) => {
                     for(let k=0;k<line.length;k++){
                     Lines.push(line);};
                     console.log('lllllllllllllllllllllllllllllllll', Lines);
-                })
 
-            });
+
+
             Art_Op.findAll({
                 where: {article_id: art.article_id}
             }).then(oprt => {
@@ -199,10 +201,30 @@ exports.findById = (req, res) => {
                     }
                     ;
                     console.log('gggggddtyrtyr', Op_t);
-                    res.send({op_t, art, Lines});
 
+                    // find all operation with in line
+                    line.forEach(function (liin, i) {
+                        Line_op.findAll({
+
+                            where: {line_id: line[i].line_id}
+
+                        }).then(op => {
+                            for (let i = 0; i < op.length; i++) {
+                                Lin_op.push(op[i].operation_id);
+                            }
+                            ;
+
+                            db.operation.findAll({
+                                where: {operation_id: Lin_op}
+                            }).then(oper => {
+                                res.send({op_t, art, line, oper});
+                            })
+                        })
+                    })
                 });
+            });
 
+            });
             });
 
 

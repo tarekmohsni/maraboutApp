@@ -56,6 +56,10 @@ db.user.belongsToMany(db.role, { through: 'user_roles', foreignKey: 'userId', ot
 // profiles -- permission (many to many)
 db.profiles.belongsToMany(db.permissions,{through: 'profil_permis', foreignKey:'profile_id', otherKey:'permission_id'});
 db.permissions.belongsToMany(db.profiles,{through: 'profil_permis', foreignKey:'permission_id', otherKey:'profile_id'});
+
+// profile has many user
+db.profiles.hasMany(db.user,{foreignKey:'profile_id'});
+db.user.belongsTo(db.profiles,{foreignKey:'profile_id'});
 // line has many machine
 db.line.hasMany(db.machine,{foreignKey:'line_id'});
 db.machine.belongsTo(db.line,{foreignKey:'line_id'});

@@ -1,7 +1,7 @@
 module.exports=(sequelize,Sequelize)=>{
     const profile=sequelize.define('profiles',{
         profile_id:{
-            type:Sequelize.STRING,
+            type:Sequelize.INTEGER,
             primaryKey:true,
 
         },

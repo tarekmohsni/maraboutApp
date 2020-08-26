@@ -85,6 +85,7 @@ module.exports = function (app) {
     // gestion profile
     app.post('/api/test/creat_profile',profile_controller.create);
     app.get('/api/test/findall_profile', profile_controller.findAll);
+    app.get('/api/test/findall_profileeee', profile_controller.findAllprof);
     // permision
     app.get('/api/test/findall_permis',permission_controller.findAll);
 

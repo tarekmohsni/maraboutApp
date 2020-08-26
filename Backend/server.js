@@ -9,6 +9,7 @@ const db = require('./A/config/db.config.js');
 
 const Role = db.role;
 const Permission =db.permissions;
+const Profile= db.profiles;
 const path = require('path');
 
 // force: true will drop the table if it already exists
@@ -54,14 +55,26 @@ function initial(){
     });
     Permission.create({
         permission_id: 1,
-        label: "save",
+        label: "SETUP",
     });
-    Permission.create({permission_id: 2,
-            label: "delete"}
+    Permission.create({
+        permission_id: 2,
+            label: "Shoop Floor"}
     );
-    Permission.create({permission_id: 3,
-            label: "update"}
-    )
+    Profile.create({
+        profile_id:1,
+        label:"admin",
+
+    }).then(profile =>{
+        profile.setPermissions([1,2]);
+    });
+    Profile.create({
+        profile_id: 2,
+        label: "user"
+    }).then(profile =>{
+                profile.setPermissions([1]);
+            });
+
 
 
 }

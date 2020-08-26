@@ -16,7 +16,9 @@ exports.signup = (req, res) => {
         name: req.body.name,
         username: req.body.username,
         email: req.body.email,
-        password: bcrypt.hashSync('marabout', 8)
+        profile_id: req.body.profile_id,
+        password: bcrypt.hashSync('marabout', 8),
+
     }).then(user => {
         Role.findAll({
             where: {
@@ -43,26 +45,50 @@ exports.signin = (req, res) => {
     User.findOne({
         where: {
             email: req.body.email,
-        }
+
+        },
+
     }).then(user => {
         if (!user) {
             return res.status(404).send('User Not Found.');
         }
+        console.log(user);
+        db.profiles.findAll({
+            include: [{
+                model: db.permissions,
+            }],
+            where: {
+                profile_id: user.profile_id,
+            }
+        }).then(function (profile) {
+            console.log('ftrggf',profile);
+            user.permissions = [];
+            profile.forEach(prof => {
+                prof.permissions.forEach(function (perm, i) {
 
-        var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+
+                user.permissions.push(prof.permissions[i].label);
+                console.log('ftrggf', prof.permissions[i].label)
+                })
+            });
+
+            var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
         if (!passwordIsValid) {
-            return res.status(401).send({ auth: false, accessToken: null, reason: "Invalid Password!" });
+            return res.status(401).send({auth: false, accessToken: null, reason: "Invalid Password!"});
         }
 
-        var token = jwt.sign({ id: user.id }, config.secret, {
-            expiresIn: 86400 // expires in 24 hours
+
+
+            var token = jwt.sign({id: user.id, permissions: user.permissions}, config.secret, {
+                expiresIn: 86400 // expires in 24 hours
+            });
+
+            res.status(200).send({auth: true, accessToken: token});
+
+        }).catch(err => {
+            res.status(500).send('Error -> ' + err);
         });
-
-        res.status(200).send({ auth: true, accessToken: token });
-
-    }).catch(err => {
-        res.status(500).send('Error -> ' + err);
-    });
+    })
 }
 
 exports.userContent = (req, res) => {
