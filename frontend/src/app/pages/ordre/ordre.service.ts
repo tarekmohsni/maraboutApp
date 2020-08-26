@@ -10,6 +10,7 @@ import {Bundle} from '../bundle/bundle.model';
 import {OperationGroupModel} from './operation-group.model';
 import {Article} from '../article-operation/article/article.model';
 import {Operation} from '../operations template/operation_t.model';
+import {Lines} from '../lines-machines-machines type/lines/lines.model';
 
 
 @Injectable({
@@ -22,9 +23,11 @@ export class OrdreService {
   ordresub = new Subject<Ordre[]>();
   bundelsub = new Subject<Bundle[]>();
   oplist: Operation[];
-  art: any[];
+  linelist: Lines[];
+  art: any;
   datasub = new Subject<Operation[]>();
-  artsub = new Subject<any[]>();
+  linesub = new Subject<Lines[]>()
+  artsub = new Subject<any>();
 
   public form: FormGroup;
 
@@ -86,12 +89,14 @@ export class OrdreService {
   // get details ordre by id
 
   getdata(id: string) {
-    this.http.get<{ op_t: Operation[], art: Article[] }>(`${this.baseUri + '/find_ordre/' + id}`).subscribe((dat) => {
+    this.http.get<{ op_t: Operation[], art: Article, line: Lines[] }>(`${this.baseUri + '/find_ordre/' + id}`).subscribe((dat) => {
       this.oplist = dat.op_t;
-      this.art = dat.art;
+      this.art = dat.art.article_name;
+      this.linelist = dat.line;
       console.log(this.art);
       this.datasub.next(...[this.oplist]);
       this.artsub.next(...[this.art]);
+      this.linesub.next(...[this.linelist]);
       // this.art = dat.data;
 
     })
@@ -141,6 +146,9 @@ export class OrdreService {
 
   datupdt() {
     return this.datasub.asObservable();
+  }
+  lineupdt() {
+    return this.linesub.asObservable();
   }
 
   artupdt() {

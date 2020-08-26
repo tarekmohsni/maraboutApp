@@ -13,7 +13,7 @@
           back stitch: {{seq.back_stitch}} | count stitch : {{seq.stitchcount}}|cut stitch
         </mat-panel-description>
 
-        <button (click)="deleteseq(seq.sequence_id)">
+        <button mat-raised-button color="warn" (click)="deleteseq(seq.sequence_id)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-expansion-panel-header>

@@ -6,6 +6,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Article} from '../../article-operation/article/article.model';
 import {OperationService} from '../../operations template/operation_t.service';
 import {Operation} from '../../operations template/operation_t.model';
+import {Lines} from '../../lines-machines-machines type/lines/lines.model';
 
 
 @Component({
@@ -14,13 +15,17 @@ import {Operation} from '../../operations template/operation_t.model';
   styleUrls: ['./ordre-update.component.css']
 })
 export class OrdreUpdateComponent implements OnInit {
-   artlist: any = [];
+  artlist: any;
   private dataupd: Subscription;
+  private lineupd: Subscription
   private ordreId: string;
   datalist: Operation[];
+  linelist: Lines[];
   private artcupd: Subscription;
   selectedAllop = false;
   selectedopIds: [];
+  selectedAllline = false;
+  selectedlineIds: [];
   displayedColumns: string[] = ['article_name', 'action'];
 
   constructor(private service: OrdreService, private router: ActivatedRoute) {
@@ -40,13 +45,18 @@ export class OrdreUpdateComponent implements OnInit {
           this.artlist = art;
           console.log(this.artlist);
         });
-      };
+        this.lineupd = this.service.lineupdt().subscribe((line) =>{
+          this.linelist = line;
+        })
+      }
+      ;
 
 
     });
 
 
   }
+
   public onSelectAllop() {
     if (this.selectedAllop === true) {
       const selected = this.datalist.map(item => item.operation_template_id)
@@ -59,4 +69,17 @@ export class OrdreUpdateComponent implements OnInit {
   }
 
   addoperation = (term) => ({operation_template_id: term, label: term});
+
+  public onSelectAllline() {
+    if (this.selectedAllop === true) {
+      const selected = this.linelist.map(item => item.line_id)
+      this.service.form.get('line_id').patchValue(selected);
+    } else {
+      const selected = []
+      this.service.form.get('line_id').patchValue(selected);
+      console.log('false', selected)
+    }
+  }
+
+  addline = (term) => ({line_id: term, label: term});
 }

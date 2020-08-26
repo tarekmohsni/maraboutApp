@@ -11,10 +11,10 @@
       <mat-panel-title>{{op.label}}</mat-panel-title>
       <mat-panel-description color="blue">
          description : {{op.description}}
-        <button [routerLink]="['/seqlist',op.operation_template_id] "> list sequence
+        <button mat-raised-button color="primary" [routerLink]="['/seqlist',op.operation_template_id] "> list sequence
         <mat-icon>list</mat-icon>
         </button>
-        <button (click)="deleteOp(op.operation_template_id)">
+        <button mat-raised-button color="warn" (click)="deleteOp(op.operation_template_id)">
           <mat-icon>delete</mat-icon>
         </button>
 

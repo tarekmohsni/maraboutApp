@@ -1,31 +1,62 @@
 
 <div class="container">
-  <!-- User list -->
-  <div class="col-md-3">
-    <div class="form-group">
-      <label>{{('Operation')}} </label>
-      <ng-select placeholder="operation " formControlName="operation_template_id" [multiple]="true"
-                 [(ngModel)]="selectedopIds" [items]="datalist"
-                 bindLabel="label" bindValue="operation_template_id"
-                 [addTag]="addoperation">
-        <ng-template ng-header-tmp>
-          <label for="check_all_3">
-            <input id="check_all_3" type="checkbox" [(ngModel)]="selectedAllop" [ngModelOptions]="{standalone: true}"
-                   name="check_all_3" title="Select All" (change)="onSelectAllop()"/>
-            Select All
-          </label>
-        </ng-template>
-        <ng-template ng-option-tmp let-item2="item" let-item$="item$" let-index="index">
-          <input id="item2-{{index}}" type="checkbox" [ngModel]="item$.selected"
-                 [ngModelOptions]="{standalone: true}"/> {{item2.label}}
-        </ng-template>
-      </ng-select>
-
+  <header class="row">
+    <div class="col-lg-12">
+      <p artilce>{{artlist}}</p>
     </div>
+  </header>
+  <div class="row">
+    <nav class="col-lg-10">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{('Operation')}} </label>
+          <ng-select placeholder="operation " ngModel type="operation_template_id" matInput name="operation_template_id" [multiple]="true"
+                     [(ngModel)]="selectedopIds" [items]="datalist"
+                     bindLabel="label" bindValue="operation_template_id"
+                     [addTag]="addoperation">
+            <ng-template ng-header-tmp>
+              <label for="check_all_3">
+                <input id="check_all_3" type="checkbox" [(ngModel)]="selectedAllop" [ngModelOptions]="{standalone: true}"
+                       name="check_all_3" title="Select All" (change)="onSelectAllop()"/>
+                Select All
+              </label>
+            </ng-template>
+            <ng-template ng-option-tmp let-item2="item" let-item$="item$" let-index="index">
+              <input id="item2-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                     [ngModelOptions]="{standalone: true}"/> {{item2.label}}
+            </ng-template>
+          </ng-select>
+
+        </div>
+      </div>
+    </nav>
+    <section class="col-lg-10">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{('Line')}} </label>
+          <ng-select placeholder="line " ngModel type="line_id" matInput name="line_id" [multiple]="true"
+                     [(ngModel)]="selectedlineIds" [items]="linelist"
+                     bindLabel="label" bindValue="line_id"
+                     [addTag]="addline">
+            <ng-template ng-header-tmp>
+              <label for="check_all_4">
+                <input id="check_all_4" type="checkbox" [(ngModel)]="selectedAllline" [ngModelOptions]="{standalone: true}"
+                       name="check_all_4" title="Select All" (change)="onSelectAllline()"/>
+                Select All
+              </label>
+            </ng-template>
+            <ng-template ng-option-tmp let-item3="item" let-item$="item$" let-index="index">
+              <input id="item3-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                     [ngModelOptions]="{standalone: true}"/> {{item3.label}}
+            </ng-template>
+          </ng-select>
+
+        </div>
+      </div>
+    </section>
   </div>
 
 </div>
-
     <!-- Progress Column -->
 
 

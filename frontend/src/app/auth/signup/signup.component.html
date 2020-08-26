@@ -23,6 +23,26 @@
           <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
         </mat-form-field>
 
+        <div class="col-md-12">
+          <div class="form-group">
+            <ng-select placeholder="profile " ngModel type="profile_id" matInput name="profile_id"
+                       [(ngModel)]="selectedprofIds" [items]="profile"
+                       bindLabel="label" bindValue="profile_id"
+                       [addTag]="addprofile" >
+              <ng-template ng-header-tmp>
+                <label for="check_all_1" >
+                  <input id="check_all_1" type="checkbox"  [(ngModel)]="selectedAll" [ngModelOptions]="{standalone: true}" name="check_all_1" title="Select All" (change)="onSelectAll(signupForm)" />
+                  Select All
+                </label>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"   /> {{item.label}}
+              </ng-template>
+            </ng-select>
+
+          </div>
+        </div>
+
       </mat-card-content>
 
       <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Signup</button>

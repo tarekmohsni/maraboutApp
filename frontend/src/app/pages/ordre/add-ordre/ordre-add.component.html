@@ -153,18 +153,20 @@
                       </div>
                     </div>
 
-                    <a
+                    <button mat-raised-button color="accent"
                       (click)="service.removeOp_group( bdl, opg )"
                       title="Remove operation groupe"
                       class="operation groupe__remove">
-                      &times;
-                    </a>
+                      &times;  Operation Group
+                    </button>
 
                   </div>
                 </ng-template>
-                <button (click)="service.addOpGrp( bdl )" class="operation_groupe__add">
-                  + op
+                <div class="example-button-row">
+                <button mat-raised-button color="warn" (click)="service.addOpGrp( bdl )" class="operation_groupe__add">
+                  + Operation Group
                 </button>
+              </div>
               </div>
 
           </div>
@@ -172,7 +174,6 @@
       </div>
 
     <ng-template matStepLabel>Bundle</ng-template>
-    <p>You are now done.</p>
     <div >
       <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()">Submit</button>
       <button mat-button matStepperPrevious>Back</button>
